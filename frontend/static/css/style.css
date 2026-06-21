@@ -1,0 +1,11 @@
+/* Global styles for the Club Management System */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.hero {
+    background: linear-gradient(135deg, #1565C0, #0D47A1);
+    color: white;
+    border-radius: 8px;
+}
