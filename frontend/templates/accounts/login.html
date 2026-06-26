@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Login — Club Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5 col-lg-4">
+    <div class="card shadow-sm border-0 mt-5">
+
+      <div class="card-header text-white text-center py-3"
+           style="background-color: #1565C0;">
+        <h4 class="mb-0">Login</h4>
+      </div>
+
+      <div class="card-body p-4">
+
+        {% if messages %}
+          {% for msg in messages %}
+            <div class="alert alert-danger alert-dismissible fade show">
+              {{ msg }}
+              <button type="button" class="btn-close"
+                      data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Username</label>
+            {{ form.username }}
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Password</label>
+            {{ form.password }}
+          </div>
+
+          <button type="submit"
+                  class="btn btn-primary w-100 py-2 fw-semibold">
+            Login
+          </button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+          No account?
+          <a href="{% url 'accounts:register' %}" class="text-primary">
+            Register here
+          </a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

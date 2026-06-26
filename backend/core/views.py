@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Views for the 'core' app go here.
+
+def home(request):
+    return render(request, 'core/index.html')
