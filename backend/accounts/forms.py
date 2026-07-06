@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User, Member
-
+#"Form validation"
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(
