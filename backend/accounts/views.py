@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
-
+#"Register, Login, Logout logic"
 
 def register_view(request):
     if request.user.is_authenticated:
