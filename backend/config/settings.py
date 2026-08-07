@@ -98,6 +98,10 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR.parent / "frontend" / "static"]
 STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 
+# Media files (uploaded avatars, generated certificate PDFs, etc.)
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Email settings (for notifications, certificate delivery)
