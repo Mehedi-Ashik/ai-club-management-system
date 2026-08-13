@@ -11,6 +11,8 @@ urlpatterns = [
     path('members/', include('members.urls')),
     path('attendance/', include('attendance.urls')),
     path('certificates/', include('certificates.urls')),
+    path('blog/', include('blog.urls')),
+    path('forum/', include('forum.urls')),
 ]
 
 if settings.DEBUG:
