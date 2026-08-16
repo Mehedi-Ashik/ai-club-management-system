@@ -13,6 +13,7 @@ urlpatterns = [
     path('certificates/', include('certificates.urls')),
     path('blog/', include('blog.urls')),
     path('forum/', include('forum.urls')),
+    path('notifications/', include('notifications.urls')),
 ]
 
 if settings.DEBUG:

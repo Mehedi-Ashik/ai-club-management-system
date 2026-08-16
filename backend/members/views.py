@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import MembershipApplication
 from accounts.models import User
+from notifications.utils import notify
 
 
 def member_list(request):
@@ -71,6 +72,11 @@ def approve_application(request, pk):
 
     application = get_object_or_404(MembershipApplication, pk=pk)
     application.approve()
+    notify(
+        application.user,
+        f'🎉 Congratulations! Your membership application has been approved.',
+        link='/members/'
+    )
     messages.success(
         request,
         f'{application.full_name} has been approved as a member!'
