@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}{{ event.title }} — Club Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h2>{{ event.title }}</h2>
+    <span class="badge bg-primary mb-3">{{ event.get_category_display }}</span>
+
+    <table class="table table-bordered mt-3">
+      <tr>
+        <th>📆 Date</th>
+        <td>{{ event.event_date }}</td>
+      </tr>
+      <tr>
+        <th>📍 Venue</th>
+        <td>{{ event.venue }}</td>
+      </tr>
+      <tr>
+        <th>💰 Fee</th>
+        <td>{% if event.fee == 0 %}Free{% else %}৳{{ event.fee }}{% endif %}</td>
+      </tr>
+      <tr>
+        <th>👥 Capacity</th>
+        <td>{{ event.capacity }} seats</td>
+      </tr>
+      <tr>
+        <th>📊 Status</th>
+        <td>{{ event.get_status_display }}</td>
+      </tr>
+    </table>
+
+    <h5 class="mt-4">About this Event</h5>
+    <p>{{ event.description }}</p>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body text-center">
+        {% if event.is_full %}
+          <p class="text-danger fw-bold">Event is Full!</p>
+        {% elif is_registered %}
+          <div class="alert alert-success">
+            ✅ You are registered!
+          </div>
+        {% elif user.is_authenticated %}
+          <form method="post"
+                action="{% url 'events:register' event.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary w-100 py-2">
+              Register Now
+            </button>
+          </form>
+        {% else %}
+          <p>Please login to register.</p>
+          <a href="{% url 'accounts:login' %}"
+             class="btn btn-outline-primary w-100">
+            Login
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if messages %}
+  {% for msg in messages %}
+    <div class="alert alert-{{ msg.tags }} mt-3">{{ msg }}</div>
+  {% endfor %}
+{% endif %}
+
+{% if user.is_president %}
+  <a href="{% url 'attendance:mark' event.id %}"
+     class="btn btn-warning mt-3 ms-2">
+    ✅ Mark Attendance
+  </a>
+  <a href="{% url 'attendance:report' event.id %}"
+     class="btn btn-info mt-3 ms-2">
+    📊 View Report
+  </a>
+  <a href="{% url 'certificates:generate' event.id %}"
+     class="btn btn-success mt-3 ms-2">
+    🎓 Generate Certificates
+  </a>
+{% endif %}
+
+<a href="{% url 'events:list' %}" class="btn btn-secondary mt-3">
+  ← Back to Events
+</a>
+{% endblock %}

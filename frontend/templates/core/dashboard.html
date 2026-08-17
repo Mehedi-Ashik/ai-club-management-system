@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Club Management System{% endblock %}
+
+{% block content %}
+<h2 class="h4 mb-4 section-heading">
+  <i class="bi bi-bar-chart-line-fill text-primary me-2"></i>Analytics Dashboard
+</h2>
+
+<!-- Summary Cards -->
+<div class="row text-center mb-5">
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card h-100 shadow-sm border-0">
+      <div class="card-body py-4">
+        <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+        <h3 class="stat-number mb-0">{{ total_members }}</h3>
+        <p class="text-muted small mb-0">Members</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card h-100 shadow-sm border-0">
+      <div class="card-body py-4">
+        <div class="stat-icon"><i class="bi bi-calendar3"></i></div>
+        <h3 class="stat-number mb-0">{{ total_events }}</h3>
+        <p class="text-muted small mb-0">Events</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card h-100 shadow-sm border-0">
+      <div class="card-body py-4">
+        <div class="stat-icon"><i class="bi bi-patch-check-fill"></i></div>
+        <h3 class="stat-number mb-0">{{ total_certificates }}</h3>
+        <p class="text-muted small mb-0">Certificates</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card h-100 shadow-sm border-0">
+      <div class="card-body py-4">
+        <div class="stat-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
+        <h3 class="stat-number mb-0">{{ total_blog_posts }}</h3>
+        <p class="text-muted small mb-0">Blog Posts</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card h-100 shadow-sm border-0">
+      <div class="card-body py-4">
+        <div class="stat-icon"><i class="bi bi-chat-square-text-fill"></i></div>
+        <h3 class="stat-number mb-0">{{ total_forum_threads }}</h3>
+        <p class="text-muted small mb-0">Forum Threads</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts -->
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-header bg-white border-0 pt-3">
+        <i class="bi bi-pie-chart-fill text-primary me-2"></i>Events by Category
+      </div>
+      <div class="card-body">
+        <div class="chart-wrap">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-header bg-white border-0 pt-3">
+        <i class="bi bi-clipboard2-check-fill text-primary me-2"></i>Attendance (Present vs Absent)
+      </div>
+      <div class="card-body">
+        <div class="chart-wrap">
+          <canvas id="attendanceChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-header bg-white border-0 pt-3">
+        <i class="bi bi-bar-chart-fill text-primary me-2"></i>Top 5 Events by Registration
+      </div>
+      <div class="card-body">
+        <div class="chart-wrap chart-wrap-wide">
+          <canvas id="eventChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  Chart.defaults.font.family = "'Inter', 'Segoe UI', sans-serif";
+  Chart.defaults.color = '#5a6472';
+
+  const brandColors = ['#1565C0', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b', '#8e44ad'];
+
+  const categoryLabels = {{ category_labels|safe }};
+  const categoryCounts = {{ category_counts|safe }};
+  new Chart(document.getElementById('categoryChart'), {
+    type: 'pie',
+    data: {
+      labels: categoryLabels,
+      datasets: [{
+        data: categoryCounts,
+        backgroundColor: brandColors,
+        borderWidth: 2,
+        borderColor: '#fff',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } }
+    }
+  });
+
+  const attendanceLabels = {{ attendance_labels|safe }};
+  const attendanceCounts = {{ attendance_counts|safe }};
+  new Chart(document.getElementById('attendanceChart'), {
+    type: 'doughnut',
+    data: {
+      labels: attendanceLabels,
+      datasets: [{
+        data: attendanceCounts,
+        backgroundColor: ['#1cc88a', '#e74a3b'],
+        borderWidth: 2,
+        borderColor: '#fff',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } }
+    }
+  });
+
+  const eventLabels = {{ event_labels|safe }};
+  const eventRegCounts = {{ event_reg_counts|safe }};
+  new Chart(document.getElementById('eventChart'), {
+    type: 'bar',
+    data: {
+      labels: eventLabels,
+      datasets: [{
+        label: 'Registrations',
+        data: eventRegCounts,
+        backgroundColor: '#1565C0',
+        borderRadius: 6,
+        maxBarThickness: 48,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Membership Applications{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📋 Pending Applications</h2>
+
+{% if applications %}
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Batch</th>
+          <th>Roll No.</th>
+          <th>Phone</th>
+          <th>Reason</th>
+          <th>Applied</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for app in applications %}
+          <tr>
+            <td>{{ app.full_name }}</td>
+            <td>{{ app.department }}</td>
+            <td>{{ app.batch }}</td>
+            <td>{{ app.roll_no }}</td>
+            <td>{{ app.phone }}</td>
+            <td>{{ app.reason|truncatewords:10 }}</td>
+            <td>{{ app.applied_at|date:"d M Y" }}</td>
+            <td>
+              <a href="{% url 'members:approve' app.pk %}"
+                 class="btn btn-success btn-sm">
+                ✅ Approve
+              </a>
+              <a href="{% url 'members:reject' app.pk %}"
+                 class="btn btn-danger btn-sm ms-1">
+                ❌ Reject
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <div class="text-center py-5">
+    <h4 class="text-muted">No pending applications!</h4>
+  </div>
+{% endif %}
+{% endblock %}

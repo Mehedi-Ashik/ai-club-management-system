@@ -1,11 +1,408 @@
 /* Global styles for the Club Management System */
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #0d0d0d;
+    color: #ece7dd;
+    margin: 0;
 }
 
+#neural-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.page-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* Hero */
 .hero {
-    background: linear-gradient(135deg, #1565C0, #0D47A1);
+    background: radial-gradient(ellipse at top, #1a1610 0%, #0a0a0a 100%);
     color: white;
+    border-radius: 16px;
+    border: 1px solid rgba(201, 169, 106, 0.2);
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 2rem;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    background: rgba(201, 169, 106, 0.08);
+    border-radius: 50%;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    bottom: -100px;
+    left: -60px;
+    width: 220px;
+    height: 220px;
+    background: rgba(201, 169, 106, 0.06);
+    border-radius: 50%;
+}
+
+.hero h1 {
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.hero p {
+    position: relative;
+    z-index: 1;
+    opacity: 0.92;
+}
+
+.hero .btn {
+    position: relative;
+    z-index: 1;
     border-radius: 8px;
+    font-weight: 600;
+    padding: 0.6rem 1.6rem;
+}
+
+/* Section headings */
+.section-heading {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* Stat cards */
+.stat-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+    border: 1px solid rgba(201, 169, 106, 0.2);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201, 169, 106, 0.5);
+    box-shadow: 0 10px 24px rgba(201, 169, 106, 0.1) !important;
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin: 0 auto 0.75rem;
+    background: rgba(201, 169, 106, 0.1);
+    color: #c9a96a;
+}
+
+.stat-number {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #c9a96a;
+}
+
+/* Event / content cards */
+.card {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+    border: 1px solid rgba(201, 169, 106, 0.2);
+    color: #ece7dd;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(201, 169, 106, 0.5);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.badge {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 0.4em 0.7em;
+}
+
+/* Quick access buttons */
+.quick-access-btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.5rem 1.3rem;
+    border-color: rgba(201, 169, 106, 0.4);
+    color: #ece7dd;
+    transition: all 0.2s ease;
+}
+
+.quick-access-btn:hover {
+    background-color: #c9a96a;
+    border-color: #c9a96a;
+    color: #0d0d0d;
+}
+
+/* Scrolling Announcement Bar */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(201, 169, 106, 0.06);
+    border-bottom: 1px solid rgba(201, 169, 106, 0.15);
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+
+.ticker-wrap .container {
+    overflow: hidden;
+}
+
+.ticker-content {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-scroll 25s linear infinite;
+    font-weight: 600;
+    user-select: none;
+}
+
+.ticker-content span {
+    background: linear-gradient(90deg, #e8c98a 0%, #c9a96a 55%, #a5824a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-right: 60px;
+}
+
+.ticker-icon {
+    color: #c9a96a;
+    -webkit-text-fill-color: #c9a96a;
+    margin-right: 8px;
+    font-size: 0.9em;
+}
+
+::selection {
+    background: rgba(201, 169, 106, 0.35);
+    color: #ffffff;
+}
+
+@keyframes ticker-scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Dashboard chart sizing */
+.chart-wrap {
+    position: relative;
+    height: 280px;
+}
+
+.chart-wrap-wide {
+    height: 320px;
+}
+
+.card-header {
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    background: rgba(201, 169, 106, 0.08);
+    border-bottom: 1px solid rgba(201, 169, 106, 0.2);
+    color: #ece7dd;
+}
+
+/* Hero Carousel */
+.hero-carousel-img {
+    height: 320px;
+    object-fit: cover;
+    filter: brightness(0.45) saturate(1.05);
+}
+
+.hero-caption {
+    bottom: 40px;
+}
+
+/* Step 12 Change: Underline color updated to full white */
+.hero-caption::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 3px;
+    background: #ffffff;
+}
+
+.hero-caption h2 {
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.hero-caption p {
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+.carousel-indicators button {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .hero-carousel-img {
+        height: 200px;
+    }
+}
+
+/* Global dark-theme overrides for Bootstrap defaults */
+a {
+    color: #c9a96a;
+}
+
+a:hover {
+    color: #e8c98a;
+}
+
+.text-muted {
+    color: #9a9285 !important;
+}
+
+.btn-primary {
+    background-color: #c9a96a;
+    border-color: #c9a96a;
+    color: #0d0d0d;
+}
+
+.btn-primary:hover {
+    background-color: #b8965a;
+    border-color: #b8965a;
+    color: #0d0d0d;
+}
+
+.btn-outline-primary {
+    color: #c9a96a;
+    border-color: #c9a96a;
+}
+
+.btn-outline-primary:hover {
+    background-color: #c9a96a;
+    border-color: #c9a96a;
+    color: #0d0d0d;
+}
+
+.bg-primary {
+    background-color: #c9a96a !important;
+    color: #0d0d0d !important;
+}
+
+.badge.bg-secondary {
+    background-color: rgba(201, 169, 106, 0.15) !important;
+    color: #c9a96a !important;
+}
+
+.form-control, textarea.form-control {
+    background-color: #1a1a1a;
+    border-color: rgba(201, 169, 106, 0.25);
+    color: #ece7dd;
+}
+
+.form-control:focus {
+    background-color: #1a1a1a;
+    border-color: #c9a96a;
+    color: #ece7dd;
+    box-shadow: 0 0 0 0.2rem rgba(201, 169, 106, 0.2);
+}
+
+.form-control::placeholder {
+    color: #6b6459;
+}
+
+footer {
+    background: #0a0a0a !important;
+    color: #9a9285 !important;
+}
+
+/* Step 11 Change: Dashboard card header background override and text/icon visibility fix */
+.card-header.bg-white {
+    background: rgba(201, 169, 106, 0.08) !important;
+    border-bottom: 1px solid rgba(201, 169, 106, 0.2) !important;
+}
+
+.card-header.bg-white .text-primary,
+.card-header.bg-white h5,
+.card-header.bg-white h6 {
+    color: #c9a96a !important;
+}
+
+.text-primary {
+    color: #c9a96a !important;
+}
+
+/* Announcement Ticker Text & Icon Full White Fix */
+.ticker-content span {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+.ticker-icon {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Card Footer & View Details Button Fix */
+.card-footer,
+.card .card-footer,
+div[class*="card-footer"] {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-top: 1px solid rgba(201, 169, 106, 0.2) !important;
+}
+
+/* Make View Details Button Clear & High Contrast */
+.card .btn-outline-primary,
+.card a.btn {
+    background-color: #c9a96a !important;
+    color: #0d0d0d !important;
+    border-color: #c9a96a !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.card .btn-outline-primary:hover,
+.card a.btn:hover {
+    background-color: #e8c98a !important;
+    border-color: #e8c98a !important;
+    color: #0d0d0d !important;
+    box-shadow: 0 4px 12px rgba(201, 169, 106, 0.3) !important;
+}
+
+/* Dashboard Stat Numbers to White */
+.stat-number,
+.stat-card h2,
+.stat-card h3,
+.stat-card .h2,
+.stat-card .h3 {
+    color: #ffffff !important;
 }

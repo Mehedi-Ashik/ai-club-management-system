@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}New Post — Club Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">✍️ Write a New Blog Post</h4>
+      </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Content</label>
+            <textarea name="content" class="form-control" rows="8" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Cover Image (optional)</label>
+            <input type="file" name="cover_image" class="form-control" accept="image/*">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Publish Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

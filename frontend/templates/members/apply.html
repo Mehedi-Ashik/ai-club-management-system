@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Apply for Membership{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card shadow-sm border-0">
+
+      <div class="card-header text-white py-3"
+           style="background-color: #1565C0;">
+        <h4 class="mb-0">Apply for Membership</h4>
+      </div>
+
+      <div class="card-body p-4">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Full Name</label>
+            <input type="text" name="full_name"
+                   class="form-control" required>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Department</label>
+              <input type="text" name="department"
+                     class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Batch</label>
+              <input type="text" name="batch"
+                     class="form-control" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Roll No.</label>
+              <input type="text" name="roll_no"
+                     class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Phone</label>
+              <input type="text" name="phone"
+                     class="form-control">
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">
+              Why do you want to join?
+            </label>
+            <textarea name="reason" class="form-control"
+                      rows="4"></textarea>
+          </div>
+
+          <button type="submit"
+                  class="btn btn-primary w-100 py-2 fw-semibold">
+            Submit Application
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

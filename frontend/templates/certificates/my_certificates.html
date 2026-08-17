@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}My Certificates — Club Management System{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🎓 My Certificates</h2>
+
+{% if certificates %}
+  <div class="row">
+    {% for cert in certificates %}
+      <div class="col-md-4 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ cert.event.title }}</h5>
+            <p class="card-text text-muted">
+              Issued: {{ cert.issued_at|date:"d M, Y" }}
+            </p>
+            {% if cert.pdf_file %}
+              <a href="{% url 'certificates:download' cert.id %}"
+                 class="btn btn-primary btn-sm">
+                ⬇️ Download PDF
+              </a>
+            {% else %}
+              <span class="badge bg-secondary">Generating...</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="text-muted">You don't have any certificates yet.</p>
+{% endif %}
+{% endblock %}

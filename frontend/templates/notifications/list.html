@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Notifications — Club Management System{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🔔 Notifications</h2>
+
+{% if notifications %}
+  <div class="list-group">
+    {% for note in notifications %}
+      <a href="{% url 'notifications:go' note.pk %}"
+         class="list-group-item list-group-item-action {% if not note.is_read %}bg-light{% endif %}">
+        <div class="d-flex justify-content-between">
+          <p class="mb-1">{{ note.message }}</p>
+          <small class="text-muted">{{ note.created_at|date:"d M, h:i A" }}</small>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="text-muted">No notifications yet.</p>
+{% endif %}
+{% endblock %}

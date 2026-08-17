@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Club Management System{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% load static %}{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% load static %}{% static 'css/style.css' %}?v=2">
 </head>
 <body>
+    <canvas id="neural-bg"></canvas>
+    <div class="page-wrapper">
     {% include "core/navbar.html" %}
+
+    <div class="ticker-wrap">
+      <div class="container">
+        <div class="ticker-content">
+          <span><i class="bi bi-mortarboard-fill ticker-icon"></i>Welcome to GENESIS — Green Neural and Synaptic Intelligence Society!</span>
+          <span><i class="bi bi-calendar-event-fill ticker-icon"></i>Don't miss our upcoming events — check the Events page for details!</span>
+          <span><i class="bi bi-trophy-fill ticker-icon"></i>Join our club today and be part of something amazing!</span>
+        </div>
+      </div>
+    </div>
 
     <main class="container my-4">
         {% block content %}{% endblock %}
@@ -18,5 +33,62 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% load static %}{% static 'js/main.js' %}"></script>
+    </div>
+    <script>
+    (function() {
+      const canvas = document.getElementById('neural-bg');
+      const ctx = canvas.getContext('2d');
+      let w, h, particles;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const COUNT = 60;
+      particles = Array.from({length: COUNT}, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.6
+      }));
+
+      function tick() {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+        }
+        for (let i = 0; i < COUNT; i++) {
+          for (let j = i + 1; j < COUNT; j++) {
+            const a = particles[i], b = particles[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 140) {
+              ctx.strokeStyle = `rgba(201,169,106,${0.14 * (1 - dist / 140)})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+        }
+        for (const p of particles) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(201,169,106,0.75)';
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+    </script>
 </body>
 </html>
