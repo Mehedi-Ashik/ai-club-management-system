@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("DJANGO_SECRET_KEY", default="replace-this-with-a-real-secret-key")
 DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
-ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", default="127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = ['mehediashik.pythonanywhere.com', 'localhost', '127.0.0.1', '*']
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
