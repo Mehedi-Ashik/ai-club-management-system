@@ -5,12 +5,17 @@ Django settings for the Club Management System project.
 import os
 from pathlib import Path
 from decouple import config
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("DJANGO_SECRET_KEY", default="replace-this-with-a-real-secret-key")
 DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 ALLOWED_HOSTS = ['*']
+
+# CSRF verification for PythonAnywhere
+CSRF_TRUSTED_ORIGINS = ['https://mehediashik.pythonanywhere.com']
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -54,7 +59,7 @@ ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "BACKEND": "django.template.backends.DjangoTemplates",
         "DIRS": [BASE_DIR.parent / "frontend" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
