@@ -90,5 +90,306 @@
       tick();
     })();
     </script>
+
+    <!-- GENESIS AI Chatbot Widget -->
+    <style>
+      #genesis-chat-toggle {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #c9a96a, #a8863f);
+        color: #14140f;
+        border: none;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 4px 18px rgba(201,169,106,0.45);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+      }
+      #genesis-chat-toggle:hover {
+        transform: scale(1.06);
+      }
+      #genesis-chat-window {
+        position: fixed;
+        bottom: 100px;
+        right: 24px;
+        width: 380px;
+        height: 560px;
+        background: #14140f;
+        border: 1px solid rgba(201,169,106,0.3);
+        border-radius: 16px;
+        box-shadow: 0 10px 34px rgba(0,0,0,0.55);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 9999;
+        font-family: 'Inter', sans-serif;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+      #genesis-chat-window.open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #genesis-chat-header {
+        background: linear-gradient(135deg, #c9a96a, #a8863f);
+        color: #14140f;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      #genesis-chat-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #14140f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+      #genesis-chat-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #genesis-chat-header-info {
+        flex: 1;
+        line-height: 1.3;
+      }
+      #genesis-chat-header-info .name {
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+      }
+      #genesis-chat-header-info .status {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        opacity: 0.85;
+      }
+      #genesis-chat-header-info .status .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #2ecc71;
+        display: inline-block;
+      }
+      #genesis-chat-close {
+        background: transparent;
+        border: none;
+        color: #14140f;
+        font-size: 20px;
+        cursor: pointer;
+        line-height: 1;
+        padding: 4px;
+      }
+      #genesis-chat-body {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        background: #14140f;
+      }
+      #genesis-chat-body .msg {
+        margin-bottom: 12px;
+        padding: 10px 13px;
+        border-radius: 12px;
+        max-width: 85%;
+        line-height: 1.55;
+      }
+      #genesis-chat-body .bot {
+        background: #24241c;
+        color: #f0e9d8;
+        align-self: flex-start;
+        border: 1px solid rgba(201,169,106,0.2);
+        border-bottom-left-radius: 3px;
+      }
+      #genesis-chat-body .user {
+        background: #c9a96a;
+        color: #14140f;
+        align-self: flex-end;
+        font-weight: 500;
+        border-bottom-right-radius: 3px;
+      }
+      #genesis-chat-body .typing {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        padding: 12px 14px;
+      }
+      #genesis-chat-body .typing span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #c9a96a;
+        animation: genesis-blink 1.2s infinite ease-in-out;
+      }
+      #genesis-chat-body .typing span:nth-child(2) { animation-delay: 0.2s; }
+      #genesis-chat-body .typing span:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes genesis-blink {
+        0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+        40% { opacity: 1; transform: scale(1); }
+      }
+      #genesis-chat-input-area {
+        display: flex;
+        border-top: 1px solid rgba(201,169,106,0.25);
+        background: #0e0e0a;
+        padding: 6px;
+      }
+      #genesis-chat-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 10px 12px;
+        font-size: 14px;
+        color: #f0e9d8;
+      }
+      #genesis-chat-input::placeholder {
+        color: #8a8370;
+      }
+      #genesis-chat-input:focus {
+        outline: none;
+      }
+      #genesis-chat-send {
+        background: #c9a96a;
+        color: #14140f;
+        border: none;
+        border-radius: 10px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      @media (max-width: 480px) {
+        #genesis-chat-window {
+          width: 92vw;
+          height: 75vh;
+          right: 4vw;
+          bottom: 90px;
+        }
+      }
+    </style>
+
+    <button id="genesis-chat-toggle">💬</button>
+
+    <div id="genesis-chat-window">
+      <div id="genesis-chat-header">
+        <div id="genesis-chat-avatar"><img src="{% static 'images/genesis_logo.png' %}" alt="GENESIS"></div>
+        <div id="genesis-chat-header-info">
+          <div class="name">GENESIS Assistant</div>
+          <div class="status"><span class="dot"></span> Online</div>
+        </div>
+        <button id="genesis-chat-close">✕</button>
+      </div>
+      <div id="genesis-chat-body">
+        <div class="msg bot">হ্যালো! আমি GENESIS ক্লাবের AI অ্যাসিস্ট্যান্ট। কীভাবে সাহায্য করতে পারি?</div>
+      </div>
+      <div id="genesis-chat-input-area">
+        <input type="text" id="genesis-chat-input" placeholder="প্রশ্ন লিখুন...">
+        <button id="genesis-chat-send">➤</button>
+      </div>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById('genesis-chat-toggle');
+      const closeBtn = document.getElementById('genesis-chat-close');
+      const chatWindow = document.getElementById('genesis-chat-window');
+      const chatBody = document.getElementById('genesis-chat-body');
+      const chatInput = document.getElementById('genesis-chat-input');
+      const sendBtn = document.getElementById('genesis-chat-send');
+
+      function toggleChat() {
+        const isOpen = chatWindow.classList.toggle('open');
+        toggleBtn.textContent = isOpen ? '✕' : '💬';
+        if (isOpen) chatInput.focus();
+      }
+
+      toggleBtn.addEventListener('click', toggleChat);
+      closeBtn.addEventListener('click', toggleChat);
+
+      function formatText(text) {
+        const escaped = text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+        return escaped
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\n/g, '<br>');
+      }
+
+      function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = 'msg ' + sender;
+        div.innerHTML = formatText(text);
+        chatBody.appendChild(div);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      function showTyping() {
+        const div = document.createElement('div');
+        div.className = 'msg bot typing';
+        div.id = 'genesis-typing-indicator';
+        div.innerHTML = '<span></span><span></span><span></span>';
+        chatBody.appendChild(div);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      function removeTyping() {
+        const el = document.getElementById('genesis-typing-indicator');
+        if (el) el.remove();
+      }
+
+      async function sendMessage() {
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        addMessage(message, 'user');
+        chatInput.value = '';
+        showTyping();
+
+        try {
+          const response = await fetch('/ai/ask/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message })
+          });
+          const data = await response.json();
+
+          removeTyping();
+
+          if (data.reply) {
+            addMessage(data.reply, 'bot');
+          } else {
+            addMessage('দুঃখিত, কিছু সমস্যা হয়েছে।', 'bot');
+          }
+        } catch (err) {
+          removeTyping();
+          addMessage('সার্ভারের সাথে সংযোগ করা যাচ্ছে না।', 'bot');
+        }
+      }
+
+      sendBtn.addEventListener('click', sendMessage);
+      chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+    </script>
 </body>
 </html>
