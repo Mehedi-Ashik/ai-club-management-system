@@ -70,3 +70,26 @@ class EventRegistration(models.Model):
 
     def __str__(self):
         return f"{self.user.username} → {self.event.title}"
+
+
+
+class EventPhoto(models.Model):
+    event = models.ForeignKey(
+        Event,
+        on_delete=models.CASCADE,
+        related_name='photos',
+    )
+    image = models.ImageField(upload_to='events/gallery/')
+    caption = models.CharField(max_length=150, blank=True)
+    uploaded_by = models.ForeignKey(
+        'accounts.User',
+        on_delete=models.CASCADE,
+        related_name='uploaded_photos',
+    )
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-uploaded_at']
+
+    def __str__(self):
+        return f"Photo for {self.event.title}"

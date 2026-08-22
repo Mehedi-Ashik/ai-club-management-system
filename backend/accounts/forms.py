@@ -107,3 +107,35 @@ class LoginForm(AuthenticationForm):
             'placeholder': 'Password',
         })
     )
+
+    
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ['full_name', 'department', 'batch', 'roll_no', 'phone', 'avatar']
+        widgets = {
+            'full_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Your full name',
+            }),
+            'department': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. CSE',
+            }),
+            'batch': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. 2021',
+            }),
+            'roll_no': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. CSE-21-045',
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. 01700000000',
+            }),
+            'avatar': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
+            }),
+        }

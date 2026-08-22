@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ProfileForm
+from .models import Member
 #"Register, Login, Logout logic"
 
 def register_view(request):
@@ -52,8 +53,24 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
+    member, created = Member.objects.get_or_create(
+        user=request.user,
+        defaults={'full_name': request.user.username}
+    )
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=member)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('accounts:profile')
+        else:
+            messages.error(request, 'Please fix the errors below.')
+    else:
+        form = ProfileForm(instance=member)
+
     return render(
         request,
         'accounts/profile.html',
-        {'user': request.user}
+        {'member': member, 'form': form}
     )
