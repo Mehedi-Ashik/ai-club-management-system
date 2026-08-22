@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}My Profile — Club Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+
+    <div class="d-flex align-items-center gap-4 mb-4">
+      {% if member.avatar %}
+        <img src="{{ member.avatar.url }}" alt="{{ member.full_name }}"
+             class="rounded-circle" style="width:90px; height:90px; object-fit:cover;">
+      {% else %}
+        <div class="rounded-circle bg-primary text-white d-inline-flex
+                    align-items-center justify-content-center"
+             style="width:90px; height:90px; font-size:34px;">
+          {{ user.username|first|upper }}
+        </div>
+      {% endif %}
+      <div>
+        <h3 class="mb-1">{{ member.full_name|default:user.username }}</h3>
+        <span class="badge bg-secondary">{{ user.get_role_display }}</span>
+        {% if member.is_approved %}
+          <span class="badge bg-success">Approved</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+      <div class="card-header">
+        <h5 class="mb-0">Edit Profile</h5>
+      </div>
+      <div class="card-body p-4">
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Full Name</label>
+            {{ form.full_name }}
+            {% if form.full_name.errors %}
+              <div class="text-danger small">{{ form.full_name.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Department</label>
+              {{ form.department }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Batch</label>
+              {{ form.batch }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Roll No</label>
+              {{ form.roll_no }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Phone</label>
+              {{ form.phone }}
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Avatar</label>
+            {{ form.avatar }}
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted small">
+              <i class="bi bi-envelope-fill me-1"></i>{{ user.email }}
+            </span>
+            <button type="submit" class="btn btn-primary px-4">
+              <i class="bi bi-check-circle-fill me-1"></i>Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
