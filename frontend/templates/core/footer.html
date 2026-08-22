@@ -1,3 +1,82 @@
-<footer class="bg-dark text-white text-center py-3 mt-5">
-  <p class="mb-0">&copy; 2026 University Club Management System. All rights reserved.</p>
+<footer class="site-footer mt-5">
+  <div class="container py-5">
+    <div class="row gy-4">
+
+      <!-- Find Us -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="footer-heading">Find Us</h6>
+        <p class="footer-text mb-2">
+          <i class="bi bi-geo-alt-fill me-2"></i>
+          <a href="https://ads.green.edu.bd" target="_blank" rel="noopener">Dept. of Artificial Intelligence &amp; Data Science</a><br>
+          Green University of Bangladesh<br>
+          Purbachal American City, Kanchan,<br>
+          Rupganj, Narayanganj-1461, Dhaka
+        </p>
+        <p class="footer-text mb-1">
+          <i class="bi bi-envelope-fill me-2"></i>
+          <a href="mailto:genesis@green.edu.bd">genesis@green.edu.bd</a>
+        </p>
+        <p class="footer-text mb-0">
+          <i class="bi bi-telephone-fill me-2"></i>
+          +880-9614-482482
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="footer-heading">Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="{% url 'core:home' %}"><i class="bi bi-chevron-right"></i> Home</a></li>
+          <li><a href="{% url 'events:list' %}"><i class="bi bi-chevron-right"></i> Events</a></li>
+          <li><a href="{% url 'blog:list' %}"><i class="bi bi-chevron-right"></i> Blog</a></li>
+          <li><a href="{% url 'members:list' %}"><i class="bi bi-chevron-right"></i> Members</a></li>
+          <li><a href="{% url 'members:apply' %}"><i class="bi bi-chevron-right"></i> Join GENESIS</a></li>
+          <li><a href="{% url 'forum:list' %}"><i class="bi bi-chevron-right"></i> Forum</a></li>
+        </ul>
+      </div>
+
+      <!-- Faculty Advisors (compact) -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="footer-heading">Faculty Advisors</h6>
+        <ul class="footer-links footer-faculty-compact">
+          <li><a href="https://ads.green.edu.bd/faculties/dr-muhammad-abul-hasan" target="_blank" rel="noopener">Dr. Muhammad Abul Hasan</a><span class="faculty-role-inline">Chairperson</span></li>
+          <li><a href="https://ads.green.edu.bd/faculties/prof-dr-asm-shihavuddin" target="_blank" rel="noopener">Prof. Dr. ASM Shihavuddin</a><span class="faculty-role-inline">Professor (Adjunct)</span></li>
+          <li><a href="https://ads.green.edu.bd/faculties/prof-dr-md-saiful-azad" target="_blank" rel="noopener">Prof. Dr. Md. Saiful Azad</a><span class="faculty-role-inline">Professor (Adjunct)</span></li>
+          <li><a href="https://ads.green.edu.bd/faculties/ms-wahia-tasnim" target="_blank" rel="noopener">Ms. Wahia Tasnim</a><span class="faculty-role-inline">Lecturer</span></li>
+          <li><a href="https://ads.green.edu.bd/faculties/mr-rakib-abdullah" target="_blank" rel="noopener">Mr. Rakib Abdullah</a><span class="faculty-role-inline">Lecturer</span></li>
+          <li><a href="https://ads.green.edu.bd/faculties/md-maruful-islam-maruf" target="_blank" rel="noopener">Md. Maruful Islam Maruf</a><span class="faculty-role-inline">Lecturer</span></li>
+          <li><a href="https://ads.green.edu.bd/faculties/ms-meher-afroz" target="_blank" rel="noopener">Ms. Meher Afroz</a><span class="faculty-role-inline">Lecturer</span></li>
+        </ul>
+      </div>
+
+      <!-- About / Follow -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="footer-heading">About GENESIS</h6>
+        <p class="footer-text">
+          Green Neural And Synaptic Intelligence Society — the official AI club of the
+          Dept. of Artificial Intelligence &amp; Data Science, Green University of Bangladesh.
+        </p>
+        <h6 class="footer-heading mt-3">Follow Us</h6>
+        <div class="footer-social">
+          <a href="https://facebook.com/genesisgub" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="mailto:genesis@green.edu.bd" aria-label="Email">
+            <i class="bi bi-envelope-fill"></i>
+          </a>
+          <a href="https://github.com/Mehedi-Ashik/ai-club-management-system" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="bi bi-github"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-bottom py-3">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <p class="mb-0">&copy; 2026 GENESIS — Green University of Bangladesh. All rights reserved.</p>
+      <p class="mb-0">Developed by <span class="footer-highlight">Mehedi Ashik</span></p>
+    </div>
+  </div>
 </footer>
