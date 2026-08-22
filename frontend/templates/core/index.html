@@ -11,25 +11,34 @@
   </div>
   <div class="carousel-inner rounded-4 shadow">
     <div class="carousel-item active">
-      <img src="{% static 'images/hero1.jpg' %}?v=3.0" class="d-block w-100 hero-carousel-img" alt="Award Recognition">
-      <div class="carousel-caption d-none d-md-block hero-caption">
-        <h2 class="fw-bold">Recognizing Excellence</h2>
-        <p>Celebrating achievements within the GENESIS community</p>
-      </div>
+      <a href="{% url 'blog:list' %}" class="hero-slide-link">
+        <img src="{% static 'images/hero1.jpg' %}?v=3.0" class="d-block w-100 hero-carousel-img" alt="Award Recognition">
+        <div class="carousel-caption d-none d-md-block hero-caption">
+          <h2 class="fw-bold">Recognizing Excellence</h2>
+          <p>Celebrating achievements within the GENESIS community</p>
+          <span class="hero-cta-btn">Read the Story <i class="bi bi-arrow-right"></i></span>
+        </div>
+      </a>
     </div>
     <div class="carousel-item">
-      <img src="{% static 'images/hero2.jpg' %}?v=3.0" class="d-block w-100 hero-carousel-img" alt="Departmental Tour 2026">
-      <div class="carousel-caption d-none d-md-block hero-caption">
-        <h2 class="fw-bold">Departmental Tour 2026</h2>
-        <p>AI &amp; Data Science students exploring Fantasy Kingdom together</p>
-      </div>
+      <a href="{% url 'blog:list' %}" class="hero-slide-link">
+        <img src="{% static 'images/hero2.jpg' %}?v=3.0" class="d-block w-100 hero-carousel-img" alt="Departmental Tour 2026">
+        <div class="carousel-caption d-none d-md-block hero-caption">
+          <h2 class="fw-bold">Departmental Tour 2026</h2>
+          <p>AI &amp; Data Science students exploring Fantasy Kingdom together</p>
+          <span class="hero-cta-btn">Read the Story <i class="bi bi-arrow-right"></i></span>
+        </div>
+      </a>
     </div>
     <div class="carousel-item">
-      <img src="{% static 'images/hero3.jpg' %}?v=3.0" class="d-block w-100 hero-carousel-img" alt="Pohela Boishakh Celebration">
-      <div class="carousel-caption d-none d-md-block hero-caption">
-        <h2 class="fw-bold">Shuvo Noboborsho 1433</h2>
-        <p>Celebrating Bengali New Year, powered by technology</p>
-      </div>
+      <a href="{% url 'blog:list' %}" class="hero-slide-link">
+        <img src="{% static 'images/hero3.jpg' %}?v=3.0" class="d-block w-100 hero-carousel-img" alt="Pohela Boishakh Celebration">
+        <div class="carousel-caption d-none d-md-block hero-caption">
+          <h2 class="fw-bold">Shuvo Noboborsho 1433</h2>
+          <p>Celebrating Bengali New Year, powered by technology</p>
+          <span class="hero-cta-btn">Read the Story <i class="bi bi-arrow-right"></i></span>
+        </div>
+      </a>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
