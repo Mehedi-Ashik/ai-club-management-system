@@ -713,3 +713,58 @@ div[class*="card-footer"] {
         margin-top: 0.75rem;
     }
 }
+
+/* ===== Django Messages / Toast Alerts ===== */
+.app-alert {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1.1rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+.app-alert span {
+    flex: 1;
+}
+
+.app-alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0 0 0 0.75rem;
+}
+
+.app-alert-close:hover {
+    opacity: 1;
+}
+
+.app-alert-success {
+    background: rgba(46, 160, 91, 0.12);
+    border-color: rgba(46, 160, 91, 0.35);
+    color: #4fd68c;
+}
+
+.app-alert-error {
+    background: rgba(220, 53, 69, 0.12);
+    border-color: rgba(220, 53, 69, 0.35);
+    color: #f27f8a;
+}
+
+.app-alert-warning {
+    background: rgba(201, 169, 106, 0.14);
+    border-color: rgba(201, 169, 106, 0.4);
+    color: #c9a96a;
+}
+
+.app-alert-info {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ece7dd;
+}

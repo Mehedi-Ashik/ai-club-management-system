@@ -26,6 +26,23 @@
     </div>
 
     <main class="container my-4">
+        {% if messages %}
+          <div class="app-messages mb-4">
+            {% for message in messages %}
+              <div class="app-alert app-alert-{{ message.tags }}" role="alert">
+                {% if message.tags == 'success' %}<i class="bi bi-check-circle-fill me-2"></i>
+                {% elif message.tags == 'error' %}<i class="bi bi-x-circle-fill me-2"></i>
+                {% elif message.tags == 'warning' %}<i class="bi bi-exclamation-triangle-fill me-2"></i>
+                {% else %}<i class="bi bi-info-circle-fill me-2"></i>
+                {% endif %}
+                <span>{{ message }}</span>
+                <button type="button" class="app-alert-close" onclick="this.parentElement.remove()" aria-label="Close">
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
 
