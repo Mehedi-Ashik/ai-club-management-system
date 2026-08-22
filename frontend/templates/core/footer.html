@@ -1,6 +1,50 @@
+{% load static %}
 <footer class="site-footer mt-5">
+
+  <!-- CTA Band -->
+  <div class="footer-cta">
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-lg-7">
+          <h5 class="mb-1">Want to be part of GENESIS?</h5>
+          <p class="mb-0 footer-cta-text">Join a growing community of AI &amp; Data Science enthusiasts at Green University.</p>
+        </div>
+        <div class="col-lg-5 text-lg-end">
+          <a href="{% url 'members:apply' %}" class="btn footer-cta-btn me-2">Join GENESIS</a>
+          <a href="{% url 'events:list' %}" class="btn footer-cta-btn-outline">See Events</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container py-5">
     <div class="row gy-4">
+
+      <!-- Brand -->
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-brand">
+          <img src="{% static 'images/genesis_logo.png' %}" alt="GENESIS" class="footer-logo">
+          <div>
+            <h6 class="footer-brand-name mb-0">GENESIS</h6>
+            <span class="footer-brand-sub">AI &amp; Data Science Club</span>
+          </div>
+        </div>
+        <p class="footer-text mt-3">
+          Green Neural And Synaptic Intelligence Society — the official AI club of the
+          Dept. of Artificial Intelligence &amp; Data Science, Green University of Bangladesh.
+        </p>
+        <div class="footer-social">
+          <a href="https://facebook.com/genesisgub" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="mailto:genesis@green.edu.bd" aria-label="Email">
+            <i class="bi bi-envelope-fill"></i>
+          </a>
+          <a href="https://github.com/Mehedi-Ashik/ai-club-management-system" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="bi bi-github"></i>
+          </a>
+        </div>
+      </div>
 
       <!-- Find Us -->
       <div class="col-lg-3 col-md-6">
@@ -16,57 +60,57 @@
           <i class="bi bi-envelope-fill me-2"></i>
           <a href="mailto:genesis@green.edu.bd">genesis@green.edu.bd</a>
         </p>
-        <p class="footer-text mb-0">
+        <p class="footer-text mb-2">
           <i class="bi bi-telephone-fill me-2"></i>
           +880-9614-482482
+        </p>
+        <p class="footer-text mb-0">
+          <i class="bi bi-clock-fill me-2"></i>
+          Sun–Thu, 9:00 AM – 5:00 PM
         </p>
       </div>
 
       <!-- Quick Links -->
-      <div class="col-lg-3 col-md-6">
+      <div class="col-lg-2 col-md-6">
         <h6 class="footer-heading">Quick Links</h6>
         <ul class="footer-links">
           <li><a href="{% url 'core:home' %}"><i class="bi bi-chevron-right"></i> Home</a></li>
+          <li><a href="{% url 'core:dashboard' %}"><i class="bi bi-chevron-right"></i> Dashboard</a></li>
           <li><a href="{% url 'events:list' %}"><i class="bi bi-chevron-right"></i> Events</a></li>
           <li><a href="{% url 'blog:list' %}"><i class="bi bi-chevron-right"></i> Blog</a></li>
+          <li><a href="{% url 'forum:list' %}"><i class="bi bi-chevron-right"></i> Forum</a></li>
           <li><a href="{% url 'members:list' %}"><i class="bi bi-chevron-right"></i> Members</a></li>
           <li><a href="{% url 'members:apply' %}"><i class="bi bi-chevron-right"></i> Join GENESIS</a></li>
-          <li><a href="{% url 'forum:list' %}"><i class="bi bi-chevron-right"></i> Forum</a></li>
+          <li><a href="{% url 'certificates:my_certificates' %}"><i class="bi bi-chevron-right"></i> Certificates</a></li>
         </ul>
       </div>
 
-      <!-- Faculty Advisors (compact) -->
-      <div class="col-lg-3 col-md-6">
+      <!-- Faculty Advisors -->
+      <div class="col-lg-4 col-md-6">
         <h6 class="footer-heading">Faculty Advisors</h6>
-        <ul class="footer-links footer-faculty-compact">
-          <li><a href="https://ads.green.edu.bd/faculties/dr-muhammad-abul-hasan" target="_blank" rel="noopener">Dr. Muhammad Abul Hasan</a><span class="faculty-role-inline">Chairperson</span></li>
-          <li><a href="https://ads.green.edu.bd/faculties/prof-dr-asm-shihavuddin" target="_blank" rel="noopener">Prof. Dr. ASM Shihavuddin</a><span class="faculty-role-inline">Professor (Adjunct)</span></li>
-          <li><a href="https://ads.green.edu.bd/faculties/prof-dr-md-saiful-azad" target="_blank" rel="noopener">Prof. Dr. Md. Saiful Azad</a><span class="faculty-role-inline">Professor (Adjunct)</span></li>
-          <li><a href="https://ads.green.edu.bd/faculties/ms-wahia-tasnim" target="_blank" rel="noopener">Ms. Wahia Tasnim</a><span class="faculty-role-inline">Lecturer</span></li>
-          <li><a href="https://ads.green.edu.bd/faculties/mr-rakib-abdullah" target="_blank" rel="noopener">Mr. Rakib Abdullah</a><span class="faculty-role-inline">Lecturer</span></li>
-          <li><a href="https://ads.green.edu.bd/faculties/md-maruful-islam-maruf" target="_blank" rel="noopener">Md. Maruful Islam Maruf</a><span class="faculty-role-inline">Lecturer</span></li>
-          <li><a href="https://ads.green.edu.bd/faculties/ms-meher-afroz" target="_blank" rel="noopener">Ms. Meher Afroz</a><span class="faculty-role-inline">Lecturer</span></li>
-        </ul>
-      </div>
-
-      <!-- About / Follow -->
-      <div class="col-lg-3 col-md-6">
-        <h6 class="footer-heading">About GENESIS</h6>
-        <p class="footer-text">
-          Green Neural And Synaptic Intelligence Society — the official AI club of the
-          Dept. of Artificial Intelligence &amp; Data Science, Green University of Bangladesh.
-        </p>
-        <h6 class="footer-heading mt-3">Follow Us</h6>
-        <div class="footer-social">
-          <a href="https://facebook.com/genesisgub" target="_blank" rel="noopener" aria-label="Facebook">
-            <i class="bi bi-facebook"></i>
-          </a>
-          <a href="mailto:genesis@green.edu.bd" aria-label="Email">
-            <i class="bi bi-envelope-fill"></i>
-          </a>
-          <a href="https://github.com/Mehedi-Ashik/ai-club-management-system" target="_blank" rel="noopener" aria-label="GitHub">
-            <i class="bi bi-github"></i>
-          </a>
+        <div class="footer-faculty-grid">
+          <div class="footer-faculty-item">
+            <a href="https://ads.green.edu.bd/faculties/dr-muhammad-abul-hasan" target="_blank" rel="noopener">Dr. Muhammad Abul Hasan</a>
+            <span class="faculty-role-inline">Chairperson</span>
+          </div>
+          
+          <div class="footer-faculty-item">
+            <a href="https://ads.green.edu.bd/faculties/prof-dr-md-saiful-azad" target="_blank" rel="noopener">Prof. Dr. Md. Saiful Azad</a>
+            <span class="faculty-role-inline">Professor (Adjunct)</span>
+          </div>
+          <div class="footer-faculty-item">
+            <a href="https://ads.green.edu.bd/faculties/ms-wahia-tasnim" target="_blank" rel="noopener">Ms. Wahia Tasnim</a>
+            <span class="faculty-role-inline">Lecturer</span>
+          </div>
+          <div class="footer-faculty-item">
+            <a href="https://ads.green.edu.bd/faculties/mr-rakib-abdullah" target="_blank" rel="noopener">Mr. Rakib Abdullah</a>
+            <span class="faculty-role-inline">Lecturer</span>
+          </div>
+          <div class="footer-faculty-item">
+            <a href="https://ads.green.edu.bd/faculties/md-maruful-islam-maruf" target="_blank" rel="noopener">Md. Maruful Islam Maruf</a>
+            <span class="faculty-role-inline">Lecturer</span>
+          </div>
+          
         </div>
       </div>
 
@@ -79,4 +123,31 @@
       <p class="mb-0">Developed by <span class="footer-highlight">Mehedi Ashik</span></p>
     </div>
   </div>
+
+  <!-- Back to Top -->
+  <button type="button" id="backToTopBtn" class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
 </footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById('backToTopBtn');
+    if (!btn) return;
+
+    function toggleBtn() {
+      if (window.scrollY > 300) {
+        btn.classList.add('show');
+      } else {
+        btn.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('scroll', toggleBtn);
+    toggleBtn();
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
