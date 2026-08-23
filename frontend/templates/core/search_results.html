@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Search Results — Club Management System{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+  <h2 class="mb-1">🔍 Search Results</h2>
+  {% if query %}
+    <p class="text-muted">
+      {{ total_results }} result{{ total_results|pluralize }} for "<strong>{{ query }}</strong>"
+    </p>
+  {% else %}
+    <p class="text-muted">Type something in the search box above to get started.</p>
+  {% endif %}
+</div>
+
+{% if query and total_results == 0 %}
+  <div class="alert alert-warning">No results found for "{{ query }}". Try a different keyword.</div>
+{% endif %}
+
+{% if events %}
+  <h5 class="mt-4">📅 Events</h5>
+  <div class="list-group mb-4">
+    {% for event in events %}
+      <a href="{% url 'events:detail' event.pk %}" class="list-group-item list-group-item-action">
+        <div class="fw-semibold">{{ event.title }}</div>
+        <small class="text-muted">{{ event.venue }} — {{ event.event_date }}</small>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if blog_posts %}
+  <h5 class="mt-4">📝 Blog Posts</h5>
+  <div class="list-group mb-4">
+    {% for post in blog_posts %}
+      <a href="{% url 'blog:detail' post.pk %}" class="list-group-item list-group-item-action">
+        <div class="fw-semibold">{{ post.title }}</div>
+        <small class="text-muted">by {{ post.author.username }}</small>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if forum_threads %}
+  <h5 class="mt-4">💬 Forum Threads</h5>
+  <div class="list-group mb-4">
+    {% for thread in forum_threads %}
+      <a href="{% url 'forum:detail' thread.pk %}" class="list-group-item list-group-item-action">
+        <div class="fw-semibold">{{ thread.title }}</div>
+        <small class="text-muted">by {{ thread.author.username }}</small>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if members %}
+  <h5 class="mt-4">👥 Members</h5>
+  <div class="list-group mb-4">
+    {% for member in members %}
+      <div class="list-group-item">
+        <div class="fw-semibold">{{ member.full_name }}</div>
+        <small class="text-muted">{{ member.department }} — {{ member.roll_no }}</small>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

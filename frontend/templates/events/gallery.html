@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}{{ event.title }} Gallery — Club Management System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">📸 {{ event.title }}</h2>
+    <span class="text-muted">Photo Gallery</span>
+  </div>
+  <a href="{% url 'events:detail' event.pk %}" class="btn btn-secondary">
+    ← Back to Event
+  </a>
+</div>
+
+{% if messages %}
+  {% for msg in messages %}
+    <div class="alert alert-{{ msg.tags }}">{{ msg }}</div>
+  {% endfor %}
+{% endif %}
+
+{% if user.is_president %}
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Upload Photo</h5>
+    </div>
+    <div class="card-body">
+      <form method="post"
+            action="{% url 'events:upload_photo' event.pk %}"
+            enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row g-2 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Image</label>
+            <input type="file" name="image" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Caption (optional)</label>
+            <input type="text" name="caption" class="form-control"
+                   placeholder="e.g. Opening ceremony">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+              Upload
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endif %}
+
+{% if photos %}
+  <div class="row g-3">
+    {% for photo in photos %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card shadow-sm border-0 h-100">
+          <img src="{{ photo.image.url }}" alt="{{ photo.caption }}"
+               class="card-img-top" style="height:180px; object-fit:cover;">
+          {% if photo.caption %}
+            <div class="card-body py-2">
+              <p class="mb-0 small">{{ photo.caption }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="text-center text-muted py-5">
+    <p>No photos uploaded yet for this event.</p>
+  </div>
+{% endif %}
+{% endblock %}
