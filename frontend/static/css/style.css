@@ -784,3 +784,288 @@ div[class*="card-footer"] {
     border-color: rgba(255, 255, 255, 0.15);
     color: #ece7dd;
 }
+
+/* ============================================================
+   PREMIUM UI UPGRADE — Hero depth, glass stat cards, animations
+   ============================================================ */
+
+.mesh-bg {
+    position: relative;
+    isolation: isolate;
+}
+
+.mesh-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: -1;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.mesh-blob-1 {
+    width: 420px;
+    height: 420px;
+    top: -180px;
+    left: -120px;
+    background: radial-gradient(circle, rgba(201, 169, 106, 0.35) 0%, rgba(201, 169, 106, 0) 70%);
+    animation: mesh-float-1 14s ease-in-out infinite;
+}
+
+.mesh-blob-2 {
+    width: 380px;
+    height: 380px;
+    top: -100px;
+    right: -140px;
+    background: radial-gradient(circle, rgba(232, 201, 138, 0.28) 0%, rgba(232, 201, 138, 0) 70%);
+    animation: mesh-float-2 18s ease-in-out infinite;
+}
+
+@keyframes mesh-float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, 30px) scale(1.08); }
+}
+
+@keyframes mesh-float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, 20px) scale(1.05); }
+}
+
+.welcome-heading {
+    font-weight: 800;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #ffffff 20%, #c9a96a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-sub {
+    font-size: 1.15rem;
+    color: rgba(236, 231, 221, 0.85);
+    font-weight: 500;
+}
+
+.welcome-tagline {
+    font-size: 0.92rem;
+    color: rgba(236, 231, 221, 0.55);
+    letter-spacing: 0.3px;
+}
+
+.welcome-logo {
+    box-shadow: 0 0 0 1px rgba(201, 169, 106, 0.3), 0 12px 32px rgba(201, 169, 106, 0.18);
+}
+
+.btn-gradient-gold {
+    background: linear-gradient(135deg, #e8c98a 0%, #c9a96a 55%, #b8965a 100%);
+    border: none;
+    color: #0d0d0d !important;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 0.7rem 1.8rem;
+    box-shadow: 0 8px 20px rgba(201, 169, 106, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gradient-gold:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 28px rgba(201, 169, 106, 0.4);
+    color: #0d0d0d !important;
+}
+
+.btn-glass-outline {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(201, 169, 106, 0.4);
+    color: #ece7dd !important;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.7rem 1.8rem;
+    transition: all 0.2s ease;
+}
+
+.btn-glass-outline:hover {
+    border-color: #c9a96a;
+    background: rgba(201, 169, 106, 0.08);
+    transform: translateY(-3px);
+    color: #c9a96a !important;
+}
+
+.stat-card-glass {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(201, 169, 106, 0.22);
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201, 169, 106, 0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card-glass:hover {
+    transform: translateY(-6px);
+    border-color: rgba(201, 169, 106, 0.55);
+    box-shadow: 0 16px 36px rgba(201, 169, 106, 0.14);
+}
+
+.stat-card-glass:hover::before {
+    opacity: 1;
+}
+
+.stat-icon-glow {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 0.85rem;
+    background: radial-gradient(circle at 30% 30%, rgba(232, 201, 138, 0.35), rgba(201, 169, 106, 0.08));
+    color: #e8c98a;
+    box-shadow: 0 0 24px rgba(201, 169, 106, 0.25);
+    position: relative;
+    z-index: 1;
+}
+
+.stat-number-glow {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2.4rem;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(201, 169, 106, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+@media (max-width: 768px) {
+    .mesh-blob-1, .mesh-blob-2 {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+
+/* ===== Soft/slow glow border variant (Stat cards) ===== */
+.glow-border-wrap-soft {
+    position: relative;
+    border-radius: 18px;
+    padding: 1.5px;
+    overflow: hidden;
+    background: #0d0d0d;
+}
+
+.glow-border-wrap-soft::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        transparent 82%,
+        rgba(232, 201, 138, 0.6) 88%,
+        rgba(255, 228, 173, 0.9) 92%,
+        rgba(232, 201, 138, 0.6) 96%,
+        transparent 100%
+    );
+    animation: glow-border-spin 5.5s linear infinite;
+    z-index: 0;
+}
+
+.glow-border-wrap-soft > .card {
+    position: relative;
+    z-index: 1;
+    border-radius: 16.5px;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* ===== Bottom accent line (Stat cards, animates on hover) ===== */
+.stat-accent-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #e8c98a, transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.4s ease;
+    z-index: 2;
+}
+
+.stat-card-glass:hover .stat-accent-line {
+    transform: scaleX(1);
+}
+
+
+/* ===== Comet-style rotating border (Upcoming Events card) ===== */
+@keyframes glow-border-spin {
+    to { transform: rotate(360deg); }
+}
+
+.glow-border-wrap {
+    position: relative;
+    border-radius: 16px;
+    padding: 1.5px;
+    overflow: hidden;
+    background: #0d0d0d;
+}
+
+.glow-border-wrap::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        transparent 87%,
+        rgba(232, 201, 138, 0.15) 91%,
+        #ffdca0 94.5%,
+        #ffffff 96%,
+        #ffdca0 97.5%,
+        rgba(232, 201, 138, 0.15) 100%
+    );
+    animation: glow-border-spin 2.4s linear infinite;
+    z-index: 0;
+}
+
+.glow-border-wrap > .card {
+    position: relative;
+    z-index: 1;
+    border-radius: 14.5px;
+    margin: 0;
+}

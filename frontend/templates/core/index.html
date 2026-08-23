@@ -49,21 +49,23 @@
   </button>
 </div>
 
-<section class="text-center mb-4">
-  <img src="{% static 'images/genesis_logo.png' %}" alt="GENESIS" height="72"
-       class="mb-3" style="border-radius:50%; box-shadow:0 4px 14px rgba(0,0,0,0.25); background:#fff; padding:4px;">
-  <h1 class="display-5 mb-2">Welcome to GENESIS</h1>
-  <p class="lead mb-1">Green Neural and Synaptic Intelligence Society</p>
-  <p class="mb-4" style="opacity:0.85; font-size:0.95rem;">Green University of Bangladesh — Club Management Portal</p>
+<section class="text-center mb-4 mesh-bg py-4 reveal">
+  <div class="mesh-blob mesh-blob-1"></div>
+  <div class="mesh-blob mesh-blob-2"></div>
+  <img src="{% static 'images/genesis_logo.png' %}" alt="GENESIS" height="76"
+       class="mb-3 welcome-logo" style="border-radius:50%; background:#fff; padding:4px;">
+  <h1 class="welcome-heading">Welcome to GENESIS</h1>
+  <p class="welcome-sub mb-1">Green Neural and Synaptic Intelligence Society</p>
+  <p class="welcome-tagline mb-4">Green University of Bangladesh — Club Management Portal</p>
   {% if not user.is_authenticated %}
-    <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg me-2">
+    <a href="{% url 'accounts:register' %}" class="btn btn-gradient-gold btn-lg me-2">
       <i class="bi bi-person-plus me-1"></i> Get Started
     </a>
-    <a href="{% url 'events:list' %}" class="btn btn-outline-primary btn-lg">
+    <a href="{% url 'events:list' %}" class="btn btn-glass-outline btn-lg">
       <i class="bi bi-calendar-event me-1"></i> Browse Events
     </a>
   {% elif user.role == 'guest' %}
-    <a href="{% url 'members:apply' %}" class="btn btn-primary btn-lg">
+    <a href="{% url 'members:apply' %}" class="btn btn-gradient-gold btn-lg">
       <i class="bi bi-person-plus me-1"></i> Apply for Membership
     </a>
   {% endif %}
@@ -72,28 +74,28 @@
 <!-- Quick Statistics -->
 <div class="row text-center mb-5">
   <div class="col-md-4 mb-3">
-    <div class="card stat-card h-100 shadow-sm border-0">
+    <div class="card stat-card-glass h-100 border-0 reveal reveal-delay-1">
       <div class="card-body py-4">
-        <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
-        <h3 class="stat-number mb-0">{{ total_members }}</h3>
+        <div class="stat-icon-glow"><i class="bi bi-people-fill"></i></div>
+        <h3 class="stat-number-glow mb-0" data-count="{{ total_members }}">0</h3>
         <p class="text-muted mb-0">Members</p>
       </div>
     </div>
   </div>
   <div class="col-md-4 mb-3">
-    <div class="card stat-card h-100 shadow-sm border-0">
+    <div class="card stat-card-glass h-100 border-0 reveal reveal-delay-2">
       <div class="card-body py-4">
-        <div class="stat-icon"><i class="bi bi-calendar3"></i></div>
-        <h3 class="stat-number mb-0">{{ total_events }}</h3>
+        <div class="stat-icon-glow"><i class="bi bi-calendar3"></i></div>
+        <h3 class="stat-number-glow mb-0" data-count="{{ total_events }}">0</h3>
         <p class="text-muted mb-0">Total Events</p>
       </div>
     </div>
   </div>
   <div class="col-md-4 mb-3">
-    <div class="card stat-card h-100 shadow-sm border-0">
+    <div class="card stat-card-glass h-100 border-0 reveal reveal-delay-3">
       <div class="card-body py-4">
-        <div class="stat-icon"><i class="bi bi-bell-fill"></i></div>
-        <h3 class="stat-number mb-0">{{ upcoming_events_count }}</h3>
+        <div class="stat-icon-glow"><i class="bi bi-bell-fill"></i></div>
+        <h3 class="stat-number-glow mb-0" data-count="{{ upcoming_events_count }}">0</h3>
         <p class="text-muted mb-0">Upcoming Events</p>
       </div>
     </div>
@@ -112,7 +114,7 @@
   <div class="row mb-5">
     {% for event in upcoming_events %}
       <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100 shadow-sm reveal">
           <div class="card-body">
             <span class="badge bg-primary mb-2">{{ event.get_category_display }}</span>
             <h5 class="card-title">{{ event.title }}</h5>
