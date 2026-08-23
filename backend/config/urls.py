@@ -15,6 +15,7 @@ urlpatterns = [
     path('forum/', include('forum.urls')),
     path('notifications/', include('notifications.urls')),
     path('ai/', include('ai_features.urls')),
+    path('payments/', include('payments.urls')),
 ]
 
 if settings.DEBUG:

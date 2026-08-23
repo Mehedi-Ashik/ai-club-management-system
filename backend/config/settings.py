@@ -116,8 +116,8 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 
 # Payment gateway (SSLCommerz / bKash)
-SSLCOMMERZ_STORE_ID = os.environ.get("SSLCOMMERZ_STORE_ID", "")
-SSLCOMMERZ_STORE_PASSWORD = os.environ.get("SSLCOMMERZ_STORE_PASSWORD", "")
+SSLCOMMERZ_STORE_ID = config("SSLCOMMERZ_STORE_ID", default="")
+SSLCOMMERZ_STORE_PASSWORD = config("SSLCOMMERZ_STORE_PASSWORD", default="")
 
 # AI / LLM API
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")

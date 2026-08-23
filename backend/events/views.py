@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Event, EventRegistration
+from .models import Event, EventRegistration, EventPhoto
 
 
 def event_list(request):
@@ -80,3 +80,38 @@ def event_create(request):
         return redirect('events:list')
 
     return render(request, 'events/event_create.html')
+
+
+def gallery_view(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    photos = event.photos.all()
+    return render(request, 'events/gallery.html', {
+        'event': event,
+        'photos': photos,
+    })
+
+
+@login_required
+def upload_photo(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+
+    if not request.user.is_president:
+        messages.error(request, 'You do not have permission!')
+        return redirect('events:gallery', pk=pk)
+
+    if request.method == 'POST':
+        image = request.FILES.get('image')
+        caption = request.POST.get('caption', '')
+
+        if image:
+            EventPhoto.objects.create(
+                event=event,
+                image=image,
+                caption=caption,
+                uploaded_by=request.user,
+            )
+            messages.success(request, 'Photo uploaded successfully!')
+        else:
+            messages.error(request, 'Please select an image to upload.')
+
+    return redirect('events:gallery', pk=pk)

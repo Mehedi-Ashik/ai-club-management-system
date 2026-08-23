@@ -9,6 +9,8 @@ urlpatterns = [
     path('create/', views.event_create, name='create'),
     path('<int:pk>/', views.event_detail, name='detail'),
     path('<int:pk>/register/', views.event_register, name='register'),
+    path('<int:pk>/gallery/', views.gallery_view, name='gallery'),
+    path('<int:pk>/gallery/upload/', views.upload_photo, name='upload_photo'),
     path('api/', api_views.event_list_api, name='api_list'),
     path('api/<int:pk>/', api_views.event_detail_api, name='api_detail'),
 ]

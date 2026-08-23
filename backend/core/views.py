@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
-from django.db.models import Count
+from django.db.models import Count, Q
 from events.models import Event
-from accounts.models import User
+from accounts.models import User, Member
 from attendance.models import Attendance
 from certificates.models import Certificate
 from blog.models import BlogPost
@@ -82,3 +82,46 @@ def dashboard(request):
         'event_reg_counts': json.dumps(event_reg_counts),
     }
     return render(request, 'core/dashboard.html', context)
+
+
+def search_view(request):
+    query = request.GET.get('q', '').strip()
+
+    events = []
+    blog_posts = []
+    forum_threads = []
+    members = []
+
+    if query:
+        events = Event.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(venue__icontains=query)
+        )[:10]
+
+        blog_posts = BlogPost.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query),
+            is_published=True,
+        )[:10]
+
+        forum_threads = ForumThread.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )[:10]
+
+        members = Member.objects.filter(
+            Q(full_name__icontains=query) |
+            Q(department__icontains=query) |
+            Q(roll_no__icontains=query)
+        )[:10]
+
+    total_results = len(events) + len(blog_posts) + len(forum_threads) + len(members)
+
+    context = {
+        'query': query,
+        'events': events,
+        'blog_posts': blog_posts,
+        'forum_threads': forum_threads,
+        'members': members,
+        'total_results': total_results,
+    }
+    return render(request, 'core/search_results.html', context)
